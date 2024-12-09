@@ -18,9 +18,11 @@ const App = () => {
   const [historyIndex, setHistoryIndex] = useState(() => getLocalStorageState("historyIndex", -1));
 
   useEffect(() => {
-    localStorage.setItem("canvasComponents", JSON.stringify(canvasComponents));
-    localStorage.setItem("history", JSON.stringify(history));
-    localStorage.setItem("historyIndex", JSON.stringify(historyIndex));
+    if(typeof window !== 'undefined'){
+      window.localStorage.setItem("canvasComponents", JSON.stringify(canvasComponents));
+      window.localStorage.setItem("history", JSON.stringify(history));
+      window.localStorage.setItem("historyIndex", JSON.stringify(historyIndex));
+    }
   }, [canvasComponents, selectedComponent, history, historyIndex]);
 
   useEffect(() => {
@@ -237,10 +239,11 @@ const App = () => {
 
   // Clear canvas and history to start again
   const deleteHandler = () => {
-    localStorage.setItem("canvasComponents", JSON.stringify([]));
-    localStorage.setItem("history", JSON.stringify([]));
-    localStorage.setItem("historyIndex", 0);
-  
+    if(typeof window !== 'undefined'){
+    window.localStorage.setItem("canvasComponents", JSON.stringify([]));
+    window.localStorage.setItem("history", JSON.stringify([]));
+    window.localStorage.setItem("historyIndex", 0);
+    }
     // Update the state to reflect the changes
     setCanvasComponents([]);
     setSelectedComponent(null);

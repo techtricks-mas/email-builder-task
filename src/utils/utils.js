@@ -151,6 +151,9 @@ export const generateUUID = () => {
  };
 
  export const getLocalStorageState = (key, defaultValue) => {
-   const saved = localStorage.getItem(key);
+   let saved
+   if(typeof window !== 'undefined'){
+      saved = window.localStorage.getItem(key);
+   }
    return saved ? JSON.parse(saved) : defaultValue;
  };
